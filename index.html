@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KHUSHI ITEMS INFO</title>
+
+<!-- SEO -->
+<meta name="description" content="Browse Free Fire items and events — characters, bundles, weapons, emotes, and more. Filter by type, rarity, tag, and region." />
+<meta name="keywords" content="Free Fire, items, events, database, characters, bundles, weapon skins, emotes, garena" />
+<meta name="theme-color" content="#ff6b00" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://i-show-akiru200.github.io/ITEM-ID-WEB" />
+<meta property="og:title" content="KHUSHI ITEMS INFO" />
+<meta property="og:description" content="Browse Free Fire items and events — characters, bundles, weapons, emotes, and more." />
+<meta property="og:image" content="https://ik.imagekit.io/mtfri1v6v/1775216677791.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="KHUSHI ITEMS INFO" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KHUSHI ITEMS INFO" />
+<meta name="twitter:description" content="Browse Free Fire items and events — characters, bundles, weapons, emotes, and more." />
+<meta name="twitter:image" content="https://ik.imagekit.io/mtfri1v6v/1775216677791.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface2: #111111;
+  --surface3: #181818;
+  --border: #1e1e1e;
+  --border2: #2a2a2a;
+  --accent: #ff6b00;
+  --accent2: #ff9500;
+  --accent-dim: rgba(255,107,0,0.12);
+  --accent-glow: rgba(255,107,0,0.25);
+  --text: #e8e8e8;
+  --text-dim: #888;
+  --text-muted: #444;
+  --rare-none: #888;
+  --rare-white: #e0e0e0;
+  --rare-blue: #4da6ff;
+  --rare-green: #4cff91;
+  --rare-purple: #c084fc;
+  --rare-purple-plus: #e040fb;
+  --rare-orange: #ff9800;
+  --rare-orange-plus: #ff6b00;
+  --rare-red: #ff4444;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+/* ── LOADING ── */
+.loading-screen {
+  position: fixed; inset: 0; background: #000; z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  transition: opacity 0.4s;
+}
+.loading-screen.hidden { opacity: 0; pointer-events: none; }
+.loading-title {
+  font-family: 'Orbitron', monospace; font-size: clamp(14px, 3vw, 22px);
+  font-weight: 900; letter-spacing: 0.15em; color: var(--accent);
+  text-shadow: 0 0 30px var(--accent-glow);
+}
+.loading-bar-wrap { width: 220px; height: 2px; background: var(--surface3); overflow: hidden; }
+.loading-bar-inner { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; box-shadow: 0 0 10px var(--accent); }
+.loading-text { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
+
+/* ── HEADER ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(0,0,0,0.95); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px); padding: 14px 20px 0;
+}
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.site-title {
+  font-family: 'Orbitron', monospace; font-size: clamp(16px, 3vw, 26px);
+  font-weight: 900; letter-spacing: 0.12em; color: var(--accent);
+  text-align: center; text-shadow: 0 0 24px var(--accent-glow); line-height: 1;
+}
+
+/* ── TAB BAR ── */
+.tab-bar {
+  display: flex; gap: 0; border-top: 1px solid var(--border);
+  margin: 12px -20px 0; padding: 0 20px;
+}
+.tab-btn {
+  font-family: 'Orbitron', monospace; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 10px 20px; background: transparent; border: none;
+  color: var(--text-muted); cursor: pointer; position: relative;
+  transition: color 0.2s;
+}
+.tab-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--accent); transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.tab-btn.active { color: var(--accent); }
+.tab-btn.active::after { transform: scaleX(1); }
+.tab-btn:hover { color: var(--text); }
+
+/* ── ITEMS TAB CONTROLS ── */
+.items-controls {
+  max-width: 1400px; margin: 0 auto; padding: 12px 20px 0;
+  display: none; flex-direction: column; gap: 0;
+}
+.items-controls.visible { display: flex; }
+
+.controls-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding-bottom: 10px; }
+.search-wrap { position: relative; }
+.search-input {
+  width: 100%; background: transparent; border: 1px solid var(--border2);
+  color: var(--text); font-family: 'Share Tech Mono', monospace; font-size: 13px;
+  padding: 9px 14px; outline: none; transition: border-color 0.2s; letter-spacing: 0.04em;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-input:focus { border-color: var(--accent); }
+
+.filter-btn-group { display: flex; gap: 6px; }
+.filter-btn {
+  background: var(--surface2); border: 1px solid var(--border2); color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; padding: 8px 11px; cursor: pointer;
+  text-transform: uppercase; transition: all 0.2s; white-space: nowrap;
+}
+.filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #000; }
+
+/* ── FILTER PANELS ── */
+.filter-panels-wrap { border-bottom: 1px solid var(--border); background: #050505; }
+.filter-panel {
+  max-width: 1400px; margin: 0 auto; display: none;
+  gap: 10px; padding: 10px 20px; flex-wrap: wrap;
+}
+.filter-panel.open { display: flex; }
+.filter-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; }
+.filter-label { font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
+.filter-select {
+  background: var(--surface2); border: 1px solid var(--border2); color: var(--text);
+  font-family: 'Share Tech Mono', monospace; font-size: 12px; padding: 7px 10px;
+  outline: none; cursor: pointer; transition: border-color 0.2s;
+}
+.filter-select:focus { border-color: var(--accent); }
+.filter-select option { background: #111; }
+.filter-clear-btn {
+  background: transparent; border: 1px solid var(--border2); color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; padding: 7px 14px; cursor: pointer;
+  text-transform: uppercase; transition: all 0.2s; align-self: flex-end;
+}
+.filter-clear-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  max-width: 1400px; margin: 0 auto; padding: 8px 20px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.stats-text { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+.stats-count { color: var(--accent); font-weight: bold; }
+
+/* ── ITEMS GRID ── */
+#itemsSection { display: none; }
+#itemsSection.visible { display: block; }
+
+main { max-width: 1400px; margin: 0 auto; padding: 16px 20px 24px; }
+.items-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+@media (max-width: 900px) { .items-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; } }
+@media (max-width: 560px) { .items-grid { grid-template-columns: repeat(2, 1fr); gap: 5px; } }
+
+.item-card {
+  position: relative; aspect-ratio: 1;
+  background: var(--surface2); border: 1px solid var(--border);
+  cursor: pointer; overflow: hidden; transition: border-color 0.18s, transform 0.18s;
+}
+.item-card:hover { border-color: var(--accent); transform: scale(1.02); z-index: 2; }
+.item-card:hover .card-overlay-hint { opacity: 1; }
+.item-img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; }
+.item-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.placeholder-icon {
+  width: 40%; height: 40%; opacity: 0.08; background: var(--text-muted);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.card-rare-dot { position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; border-radius: 50%; }
+.card-overlay-hint {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.45);
+  opacity: 0; transition: opacity 0.18s; display: flex; align-items: center; justify-content: center;
+}
+.card-overlay-hint span { font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+
+/* ── PAGINATION ── */
+.pagination {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 5px; padding: 24px 20px 40px;
+  max-width: 1400px; margin: 0 auto;
+}
+.page-btn {
+  background: var(--surface2); border: 1px solid var(--border2); color: var(--text-dim);
+  font-family: 'Share Tech Mono', monospace; font-size: 12px;
+  padding: 7px 12px; cursor: pointer; min-width: 38px; text-align: center;
+  transition: all 0.15s; letter-spacing: 0.05em;
+}
+.page-btn:hover { border-color: var(--accent); color: var(--accent); }
+.page-btn.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: bold; }
+.page-btn.ellipsis { border-color: transparent; background: transparent; cursor: default; color: var(--text-muted); }
+.page-btn.ellipsis:hover { border-color: transparent; color: var(--text-muted); }
+.page-nav-btn {
+  background: transparent; border: 1px solid var(--border2); color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; padding: 7px 14px; cursor: pointer;
+  text-transform: uppercase; transition: all 0.15s;
+}
+.page-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.page-nav-btn:disabled { opacity: 0.2; cursor: default; }
+.page-nav-btn:disabled:hover { border-color: var(--border2); color: var(--text-dim); }
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 80px 20px; grid-column: 1 / -1; }
+.empty-state-title { font-family: 'Orbitron', monospace; font-size: 13px; letter-spacing: 0.2em; color: var(--text-muted); margin-bottom: 8px; }
+.empty-state-sub { font-size: 13px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+/* ── ITEMS OVERLAY ── */
+.overlay {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  opacity: 0; pointer-events: none; transition: opacity 0.22s;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+.overlay-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); cursor: pointer; }
+.overlay-card {
+  position: relative; z-index: 1; background: var(--surface);
+  border: 1px solid var(--border2); width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column;
+  transform: translateY(12px) scale(0.97); transition: transform 0.22s;
+}
+.overlay.open .overlay-card { transform: translateY(0) scale(1); }
+.overlay-card::-webkit-scrollbar { width: 3px; }
+.overlay-card::-webkit-scrollbar-thumb { background: var(--border2); }
+
+.overlay-img-wrap {
+  position: relative; background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  min-height: 220px; border-bottom: 1px solid var(--border);
+}
+.overlay-img { width: 200px; height: 200px; object-fit: contain; display: block; padding: 12px; }
+.overlay-close {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,0.6); border: 1px solid var(--border2);
+  color: var(--text-dim); font-size: 14px; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.15s; font-family: 'Rajdhani', sans-serif; font-weight: 700;
+}
+.overlay-close:hover { border-color: var(--accent); color: var(--accent); }
+.overlay-rare-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+.overlay-details { padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 0; }
+.detail-row { display: grid; grid-template-columns: 110px 1fr; gap: 0; border-bottom: 1px solid var(--border); }
+.detail-row:last-child { border-bottom: none; }
+.detail-key {
+  font-family: 'Orbitron', monospace; font-size: 8.5px; letter-spacing: 0.18em;
+  color: var(--text-muted); text-transform: uppercase; padding: 11px 0;
+  display: flex; align-items: center;
+}
+.detail-val {
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--text); padding: 10px 0 10px 12px; display: flex;
+  align-items: center; word-break: break-all; letter-spacing: 0.02em; line-height: 1.4;
+}
+.detail-val.mono { font-family: 'Share Tech Mono', monospace; font-size: 12px; }
+.detail-val.description { font-size: 12.5px; color: var(--text-dim); line-height: 1.55; align-items: flex-start; padding-top: 11px; }
+.rare-badge { display: inline-block; padding: 2px 8px; font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; }
+.overlay-img-loading { position: absolute; width: 24px; height: 24px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+/* ── EVENTS TAB ── */
+#eventsSection { display: none; }
+#eventsSection.visible { display: block; }
+
+.events-controls {
+  max-width: 800px; margin: 0 auto; padding: 16px 20px 12px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.region-selector-wrap {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+}
+
+.region-label {
+  font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 0.18em;
+  color: var(--text-muted); text-transform: uppercase; white-space: nowrap;
+}
+
+.region-select {
+  flex: 1; min-width: 180px; background: transparent; border: 1px solid var(--border2);
+  color: var(--text); font-family: 'Share Tech Mono', monospace; font-size: 12px;
+  padding: 9px 12px; outline: none; cursor: pointer; transition: border-color 0.2s;
+}
+.region-select:focus { border-color: var(--accent); }
+.region-select option { background: #111; }
+
+.events-search {
+  width: 100%; background: transparent; border: 1px solid var(--border2);
+  color: var(--text); font-family: 'Share Tech Mono', monospace; font-size: 13px;
+  padding: 9px 14px; outline: none; transition: border-color 0.2s; letter-spacing: 0.04em;
+}
+.events-search::placeholder { color: var(--text-muted); }
+.events-search:focus { border-color: var(--accent); }
+
+.events-section-label {
+  max-width: 800px; margin: 0 auto; padding: 12px 20px 6px;
+  font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 0.25em;
+  color: var(--text-muted); text-transform: uppercase; border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.events-section-label span {
+  display: inline-block; width: 4px; height: 4px;
+  background: var(--accent); border-radius: 50%;
+}
+
+.events-list { max-width: 800px; margin: 0 auto; padding: 0 20px 40px; display: flex; flex-direction: column; gap: 8px; }
+
+.event-card {
+  position: relative; cursor: pointer; overflow: hidden;
+  border: 1px solid var(--border); background: var(--surface2);
+  transition: border-color 0.18s, transform 0.15s;
+  display: flex; flex-direction: column;
+}
+.event-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+.event-banner-wrap { position: relative; width: 100%; overflow: hidden; background: var(--surface3); }
+.event-banner {
+  width: 100%; display: block; object-fit: cover;
+  max-height: 200px; transition: transform 0.3s;
+}
+.event-card:hover .event-banner { transform: scale(1.02); }
+.event-banner-placeholder-img { width: 100%; display: block; object-fit: cover; max-height: 200px; }
+
+.event-banner-placeholder {
+  width: 100%; height: 120px; display: flex; align-items: center;
+  justify-content: center; background: var(--surface3);
+}
+.event-banner-placeholder-text {
+  font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--text-muted);
+}
+
+.event-footer {
+  padding: 10px 14px; display: flex; align-items: center;
+  justify-content: space-between; gap: 10px; border-top: 1px solid var(--border);
+}
+.event-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 600;
+  color: var(--text); letter-spacing: 0.03em; line-height: 1.3;
+  flex: 1;
+}
+.event-time-badge {
+  font-family: 'Share Tech Mono', monospace; font-size: 9px;
+  color: var(--text-muted); white-space: nowrap; letter-spacing: 0.04em;
+}
+.event-live-dot {
+  display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+  background: #4cff91; margin-right: 5px; box-shadow: 0 0 6px #4cff91;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.events-loading {
+  max-width: 800px; margin: 40px auto; text-align: center;
+  font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-muted);
+  letter-spacing: 0.1em; display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.events-spinner {
+  width: 28px; height: 28px; border: 2px solid var(--border2);
+  border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+.events-error {
+  max-width: 800px; margin: 40px auto 0; padding: 0 20px; text-align: center;
+  font-family: 'Share Tech Mono', monospace; font-size: 12px;
+  color: var(--rare-red); letter-spacing: 0.08em;
+}
+
+/* ── EVENT OVERLAY ── */
+.ev-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  opacity: 0; pointer-events: none; transition: opacity 0.22s;
+}
+.ev-overlay.open { opacity: 1; pointer-events: all; }
+.ev-overlay-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); cursor: pointer; }
+.ev-overlay-card {
+  position: relative; z-index: 1; background: var(--surface);
+  border: 1px solid var(--border2); width: 100%; max-width: 700px;
+  max-height: 92vh; overflow-y: auto; display: flex; flex-direction: column;
+  transform: translateY(12px) scale(0.97); transition: transform 0.22s;
+}
+.ev-overlay.open .ev-overlay-card { transform: translateY(0) scale(1); }
+.ev-overlay-card::-webkit-scrollbar { width: 3px; }
+.ev-overlay-card::-webkit-scrollbar-thumb { background: var(--border2); }
+
+.ev-overlay-banner-wrap { position: relative; background: var(--surface3); border-bottom: 1px solid var(--border); }
+.ev-overlay-banner { width: 100%; display: block; object-fit: contain; max-height: 340px; }
+.ev-overlay-close {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,0.7); border: 1px solid var(--border2);
+  color: var(--text-dim); font-size: 14px; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.15s; font-family: 'Rajdhani', sans-serif; font-weight: 700;
+}
+.ev-overlay-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.ev-overlay-body { padding: 20px 22px 26px; display: flex; flex-direction: column; gap: 0; }
+.ev-detail-row { display: grid; grid-template-columns: 100px 1fr; gap: 0; border-bottom: 1px solid var(--border); }
+.ev-detail-row:last-child { border-bottom: none; }
+.ev-detail-key {
+  font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 0.18em;
+  color: var(--text-muted); text-transform: uppercase; padding: 11px 0;
+  display: flex; align-items: flex-start; padding-top: 13px;
+}
+.ev-detail-val {
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--text); padding: 10px 0 10px 12px;
+  display: flex; align-items: center; word-break: break-word; line-height: 1.4;
+}
+.ev-detail-val.mono { font-family: 'Share Tech Mono', monospace; font-size: 11px; word-break: break-all; }
+.ev-detail-val.desc { font-size: 12.5px; color: var(--text-dim); line-height: 1.6; align-items: flex-start; white-space: pre-wrap; }
+.ev-detail-val.link-val { color: var(--accent); font-size: 12px; text-decoration: none; }
+.ev-detail-val.link-val:hover { text-decoration: underline; }
+
+.ev-status-active {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #4cff91; letter-spacing: 0.08em;
+}
+.ev-status-upcoming { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 0.08em; }
+.ev-status-ended { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; }
+
+/* ── RARE / DOT COLORS ── */
+.rare-NONE { color: var(--rare-none); background: rgba(136,136,136,0.1); }
+.rare-WHITE { color: var(--rare-white); background: rgba(224,224,224,0.08); }
+.rare-BLUE { color: var(--rare-blue); background: rgba(77,166,255,0.1); }
+.rare-GREEN { color: var(--rare-green); background: rgba(76,255,145,0.1); }
+.rare-PURPLE { color: var(--rare-purple); background: rgba(192,132,252,0.1); }
+.rare-PURPLE_PLUS { color: var(--rare-purple-plus); background: rgba(224,64,251,0.1); }
+.rare-ORANGE { color: var(--rare-orange); background: rgba(255,152,0,0.1); }
+.rare-ORANGE_PLUS { color: var(--rare-orange-plus); background: rgba(255,107,0,0.1); }
+.rare-RED { color: var(--rare-red); background: rgba(255,68,68,0.1); }
+
+.dot-NONE { background: var(--rare-none); }
+.dot-WHITE { background: var(--rare-white); }
+.dot-BLUE { background: var(--rare-blue); }
+.dot-GREEN { background: var(--rare-green); }
+.dot-PURPLE { background: var(--rare-purple); }
+.dot-PURPLE_PLUS { background: var(--rare-purple-plus); }
+.dot-ORANGE { background: var(--rare-orange); }
+.dot-ORANGE_PLUS { background: var(--rare-orange-plus); }
+.dot-RED { background: var(--rare-red); }
+
+.bar-NONE { background: var(--rare-none); }
+.bar-WHITE { background: var(--rare-white); }
+.bar-BLUE { background: var(--rare-blue); box-shadow: 0 0 8px var(--rare-blue); }
+.bar-GREEN { background: var(--rare-green); box-shadow: 0 0 8px var(--rare-green); }
+.bar-PURPLE { background: var(--rare-purple); box-shadow: 0 0 8px var(--rare-purple); }
+.bar-PURPLE_PLUS { background: var(--rare-purple-plus); box-shadow: 0 0 12px var(--rare-purple-plus); }
+.bar-ORANGE { background: var(--rare-orange); box-shadow: 0 0 8px var(--rare-orange); }
+.bar-ORANGE_PLUS { background: var(--rare-orange-plus); box-shadow: 0 0 12px var(--rare-orange-plus); }
+.bar-RED { background: var(--rare-red); box-shadow: 0 0 12px var(--rare-red); }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--border2); }
+
+@media (max-width: 560px) {
+  main { padding: 10px 10px 20px; }
+  .controls-row { grid-template-columns: 1fr; }
+  .filter-btn-group { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .filter-btn { text-align: center; }
+  .overlay-img { width: 150px; height: 150px; }
+  .overlay-img-wrap { min-height: 170px; }
+  .detail-row { grid-template-columns: 90px 1fr; }
+  .ev-detail-row { grid-template-columns: 80px 1fr; }
+  .tab-btn { padding: 10px 12px; font-size: 9px; letter-spacing: 0.12em; }
+}
+
+/* ── OVERLAY ACTION BUTTONS ── */
+.overlay-actions {
+  display: flex; gap: 8px; padding: 12px 20px 20px;
+  border-top: 1px solid var(--border);
+}
+.overlay-action-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  color: var(--text-dim); font-family: 'Orbitron', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+  padding: 10px 0; cursor: pointer; transition: all 0.2s;
+  text-transform: uppercase;
+}
+.overlay-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+.overlay-action-btn.copied { border-color: #4cff91; color: #4cff91; }
+
+/* ── HEADER TITLE ROW ── */
+.header-title-row {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.settings-icon-btn {
+  position: absolute; right: 0;
+  background: transparent; border: 1px solid var(--border2);
+  color: var(--text-dim); width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; border-radius: 0;
+}
+.settings-icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── SETTINGS BACKDROP ── */
+.settings-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px); z-index: 600;
+  opacity: 0; pointer-events: none; transition: opacity 0.28s;
+}
+.settings-backdrop.open { opacity: 1; pointer-events: all; }
+
+/* ── SETTINGS BOTTOM SHEET ── */
+.settings-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 700;
+  background: var(--surface); border-top: 1px solid var(--border2);
+  padding: 12px 24px 40px;
+  transform: translateY(100%); transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+  max-height: 85vh; overflow-y: auto;
+}
+.settings-sheet.open { transform: translateY(0); }
+
+.settings-handle {
+  width: 40px; height: 3px; background: var(--border2);
+  border-radius: 2px; margin: 0 auto 18px; 
+}
+.settings-title {
+  font-family: 'Orbitron', monospace; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.25em; color: var(--accent); margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ── SETTINGS ITEM ROW ── */
+.settings-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.settings-item-label {
+  font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600;
+  color: var(--text); letter-spacing: 0.05em;
+}
+.settings-item-sub {
+  font-family: 'Share Tech Mono', monospace; font-size: 10px;
+  color: var(--text-muted); letter-spacing: 0.04em; margin-top: 3px;
+}
+
+/* ── TOGGLE BUTTON ── */
+.toggle-btn {
+  width: 46px; height: 26px; border-radius: 13px;
+  background: var(--surface3); border: 1px solid var(--border2);
+  position: relative; cursor: pointer; transition: background 0.25s, border-color 0.25s;
+  flex-shrink: 0;
+}
+.toggle-btn.on { background: var(--accent); border-color: var(--accent); }
+.toggle-knob {
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--text-muted); transition: transform 0.25s, background 0.25s;
+}
+.toggle-btn.on .toggle-knob { transform: translateX(20px); background: #000; }
+
+/* ── SETTINGS DIVIDER ── */
+.settings-divider { height: 1px; background: var(--border); margin: 18px 0 14px; }
+
+/* ── OWNER SECTION ── */
+.settings-owner-label {
+  font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 0.2em;
+  color: var(--text-muted); margin-bottom: 14px;
+}
+.settings-owner-links { display: flex; gap: 14px; align-items: center; }
+.settings-owner-link {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border: 1px solid var(--border2);
+  color: var(--text-dim); background: var(--surface2);
+  text-decoration: none; transition: all 0.2s;
+}
+.settings-owner-link:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── DEV MODE TOAST ── */
+.dev-toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--accent); color: #000;
+  font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+  padding: 9px 18px; z-index: 800;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+.dev-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── DEV MODE card indicator ── */
+body.dev-mode .item-card { cursor: crosshair; }
+body.dev-mode .item-card .card-overlay-hint span::before { content: 'COPY ID · '; }
+
+/* ── LIGHT THEME ── */
+body.light-theme {
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --surface2: #efefef;
+  --surface3: #e5e5e5;
+  --border: #d8d8d8;
+  --border2: #c8c8c8;
+  --text: #111111;
+  --text-dim: #555555;
+  --text-muted: #999999;
+}
+body.light-theme header { background: rgba(245,245,245,0.96); }
+body.light-theme .loading-screen { background: #f5f5f5; }
+body.light-theme .filter-panels-wrap { background: #f0f0f0; }
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-title">KHUSHI ITEMS INFO</div>
+  <div class="loading-bar-wrap"><div class="loading-bar-inner" id="loadingBar"></div></div>
+  <div class="loading-text" id="loadingText">LOADING DATA...</div>
+</div>
+
+<!-- HEADER -->
+<header id="siteHeader" style="display:none">
+  <div class="header-inner">
+    <div class="header-title-row">
+      <div class="site-title">KHUSHI ITEMS INFO</div>
+      <button class="settings-icon-btn" onclick="openSettings()" aria-label="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabEvents" onclick="switchTab('events')">EVENTS</button>
+      <button class="tab-btn" id="tabItems" onclick="switchTab('items')">ITEMS</button>
+    </div>
+  </div>
+</header>
+
+<!-- ══ ITEMS TAB CONTENT ══ -->
+
+<!-- Items controls (search + filter buttons) -->
+<div class="items-controls" id="itemsControls">
+  <div class="controls-row">
+    <div class="search-wrap">
+      <input class="search-input" type="text" id="searchInput"
+        placeholder="Search by item ID, name, or icon name..."
+        autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="filter-btn-group">
+      <button class="filter-btn" id="btnFilterType" onclick="togglePanel('type')">TYPE</button>
+      <button class="filter-btn" id="btnFilterRare" onclick="togglePanel('rare')">RARE</button>
+      <button class="filter-btn" id="btnFilterTag" onclick="togglePanel('tag')">TAG</button>
+    </div>
+  </div>
+</div>
+
+<!-- Filter panels -->
+<div class="filter-panels-wrap" id="filterPanelsWrap">
+  <div class="filter-panel" id="panelType">
+    <div class="filter-group">
+      <div class="filter-label">Type</div>
+      <select class="filter-select" id="selectType" onchange="applyFilters()">
+        <option value="">All Types</option>
+      </select>
+    </div>
+    <button class="filter-clear-btn" onclick="clearFilter('type')">Clear</button>
+  </div>
+  <div class="filter-panel" id="panelRare">
+    <div class="filter-group">
+      <div class="filter-label">Rarity</div>
+      <select class="filter-select" id="selectRare" onchange="applyFilters()">
+        <option value="">All Rarities</option>
+        <option value="NONE">NONE</option>
+        <option value="WHITE">WHITE</option>
+        <option value="BLUE">BLUE</option>
+        <option value="GREEN">GREEN</option>
+        <option value="PURPLE">PURPLE</option>
+        <option value="PURPLE_PLUS">PURPLE PLUS</option>
+        <option value="ORANGE">ORANGE</option>
+        <option value="ORANGE_PLUS">ORANGE PLUS</option>
+        <option value="RED">RED</option>
+      </select>
+    </div>
+    <button class="filter-clear-btn" onclick="clearFilter('rare')">Clear</button>
+  </div>
+  <div class="filter-panel" id="panelTag">
+    <div class="filter-group">
+      <div class="filter-label">Tag</div>
+      <select class="filter-select" id="selectTag" onchange="applyFilters()">
+        <option value="">All Tags</option>
+      </select>
+    </div>
+    <button class="filter-clear-btn" onclick="clearFilter('tag')">Clear</button>
+  </div>
+</div>
+
+<!-- Items stats + grid + pagination -->
+<div id="itemsSection" class="">
+  <div class="stats-bar" id="statsBar">
+    <span class="stats-text">Showing <span class="stats-count" id="statsCount">0</span> items</span>
+    <span class="stats-text" id="statsPage"></span>
+  </div>
+  <main><div class="items-grid" id="itemsGrid"></div></main>
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- ══ EVENTS TAB CONTENT ══ -->
+<div id="eventsSection">
+  <div class="events-controls">
+    <div class="region-selector-wrap">
+      <span class="region-label">Region</span>
+      <select class="region-select" id="regionSelect" onchange="loadEvents()">
+        <option value="IND">INDIA (IND)</option>
+        <option value="SG">SINGAPORE (SG)</option>
+        <option value="ME">MIDDLE EAST (ME)</option>
+        <option value="BR">BRAZIL (BR)</option>
+        <option value="BD">BANGLADESH (BD)</option>
+        <option value="PK">PAKISTAN (PK)</option>
+        <option value="VN">VIETNAM (VN)</option>
+        <option value="US">UNITED STATES (US)</option>
+        <option value="TW">TAIWAN (TW)</option>
+        <option value="SAC">SOUTH AMERICA (SAC)</option>
+        <option value="RU">RUSSIA (RU)</option>
+        <option value="ID">INDONESIA (ID)</option>
+        <option value="NA">NORTH AMERICA (NA)</option>
+        <option value="TH">THAILAND (TH)</option>
+        <option value="EUROPE">EUROPE (EU)</option>
+      </select>
+    </div>
+    <input class="events-search" type="text" id="eventsSearch"
+      placeholder="Search events by title..."
+      autocomplete="off" spellcheck="false" oninput="renderEvents()" />
+  </div>
+
+  <div id="eventsBody"></div>
+</div>
+
+<!-- ITEMS OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="overlay-backdrop" onclick="closeOverlay()"></div>
+  <div class="overlay-card">
+    <div class="overlay-img-wrap" id="overlayImgWrap">
+      <div class="overlay-img-loading" id="overlayLoader"></div>
+      <img class="overlay-img" id="overlayImg" style="display:none" alt="" />
+      <div class="overlay-rare-bar" id="overlayRareBar"></div>
+      <button class="overlay-close" onclick="closeOverlay()">&#x2715;</button>
+    </div>
+    <div class="overlay-details" id="overlayDetails"></div>
+    <div class="overlay-actions">
+      <button class="overlay-action-btn" id="copyIdBtn" onclick="copyOverlayItemId()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        COPY ID
+      </button>
+      <button class="overlay-action-btn" onclick="shareOverlayItem()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        SHARE
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EVENTS OVERLAY -->
+<div class="ev-overlay" id="evOverlay">
+  <div class="ev-overlay-backdrop" onclick="closeEvOverlay()"></div>
+  <div class="ev-overlay-card">
+    <div class="ev-overlay-banner-wrap" id="evOverlayBannerWrap">
+      <img class="ev-overlay-banner" id="evOverlayBanner" style="display:none" alt="" />
+      <button class="ev-overlay-close" onclick="closeEvOverlay()">&#x2715;</button>
+    </div>
+    <div class="ev-overlay-body" id="evOverlayBody"></div>
+  </div>
+</div>
+
+<!-- SETTINGS BOTTOM SHEET -->
+<div class="settings-backdrop" id="settingsBackdrop" onclick="closeSettings()"></div>
+<div class="settings-sheet" id="settingsSheet">
+  <div class="settings-handle"></div>
+  <div class="settings-title">SETTINGS</div>
+
+  <div class="settings-item">
+    <div class="settings-item-info">
+      <div class="settings-item-label">Dark / Light Mode</div>
+      <div class="settings-item-sub">Toggle theme</div>
+    </div>
+    <button class="toggle-btn" id="themeToggle" onclick="toggleTheme()">
+      <span class="toggle-knob"></span>
+    </button>
+  </div>
+
+  <div class="settings-item">
+    <div class="settings-item-info">
+      <div class="settings-item-label">Developer Mode</div>
+      <div class="settings-item-sub">Click item image to copy ID</div>
+    </div>
+    <button class="toggle-btn" id="devToggle" onclick="toggleDevMode()">
+      <span class="toggle-knob"></span>
+    </button>
+  </div>
+
+  <div class="settings-divider"></div>
+
+  <div class="settings-owner-label">OWNER</div>
+  <div class="settings-owner-links">
+    <a class="settings-owner-link" href="tg://openmessage?user_id=7051421564" target="_blank" aria-label="Telegram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/>
+      </svg>
+    </a>
+    <a class="settings-owner-link" href="https://www.instagram.com/khushi__09_f_f" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- DEV MODE TOAST -->
+<div class="dev-toast" id="devToast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════════
+const ITEMS_PER_PAGE = 80;
+const CDN = id => `https://cdn.jsdelivr.net/gh/ShahGCreator/icon@main/PNG/${id}.png`;
+const EVENTS_API = region => `https://raw.githubusercontent.com/KillerSharmaBot/Event/main/data/event_${region.toLowerCase()}.json`;
+
+// ═══════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════
+let allItems = [];
+let filteredItems = [];
+let currentPage = 1;
+let totalPages = 1;
+let activePanels = { type: false, rare: false, tag: false };
+let currentTab = 'events';
+
+let eventsData = null;      // raw fetched data
+let eventsRegion = 'IND';
+let eventsCache = {};       // region -> data
+
+// ═══════════════════════════════════════════════════
+//  TAB SWITCH
+// ═══════════════════════════════════════════════════
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tabItems').classList.toggle('active', tab === 'items');
+  document.getElementById('tabEvents').classList.toggle('active', tab === 'events');
+
+  document.getElementById('itemsControls').classList.toggle('visible', tab === 'items');
+  document.getElementById('filterPanelsWrap').style.display = tab === 'items' ? '' : 'none';
+  document.getElementById('itemsSection').classList.toggle('visible', tab === 'items');
+  document.getElementById('eventsSection').classList.toggle('visible', tab === 'events');
+
+  if (tab === 'events' && !eventsData) loadEvents();
+
+  // Update URL
+  const p = new URLSearchParams(window.location.search);
+  if (tab === 'items') p.set('tab', 'items'); else p.delete('tab');
+  history.replaceState(null, '', p.toString() ? location.pathname + '?' + p.toString() : location.pathname);
+}
+
+// ═══════════════════════════════════════════════════
+//  URL PARAMS
+// ═══════════════════════════════════════════════════
+function getParams() { return new URLSearchParams(window.location.search); }
+
+function pushURL() {
+  const params = new URLSearchParams();
+  const q = document.getElementById('searchInput').value.trim();
+  const typeF = document.getElementById('selectType').value;
+  const rareF = document.getElementById('selectRare').value;
+  const tagF = document.getElementById('selectTag').value;
+  if (q) params.set('q', q);
+  if (typeF) params.set('type', typeF);
+  if (rareF) params.set('rare', rareF);
+  if (tagF) params.set('tag', tagF);
+  if (currentPage > 1) params.set('page', currentPage);
+  if (currentTab === 'items') params.set('tab', 'items');
+  const qs = params.toString();
+  history.replaceState(null, '', qs ? (location.pathname + '?' + qs) : location.pathname);
+}
+
+function readURLIntoUI() {
+  const p = getParams();
+  if (p.get('q')) document.getElementById('searchInput').value = p.get('q');
+  if (p.get('type')) document.getElementById('selectType').value = p.get('type');
+  if (p.get('rare')) document.getElementById('selectRare').value = p.get('rare');
+  if (p.get('tag')) document.getElementById('selectTag').value = p.get('tag');
+  if (p.get('page')) currentPage = Math.max(1, parseInt(p.get('page')) || 1);
+  if (p.get('region')) document.getElementById('regionSelect').value = p.get('region');
+}
+
+function applyFiltersFromState() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const typeF = document.getElementById('selectType').value;
+  const rareF = document.getElementById('selectRare').value;
+  const tagF = document.getElementById('selectTag').value;
+  filteredItems = allItems.filter(item => {
+    if (typeF && (item.type || '').toLowerCase() !== typeF.toLowerCase()) return false;
+    if (rareF && (item.Rare || '').toLowerCase() !== rareF.toLowerCase()) return false;
+    if (tagF && (item.tag || '').toLowerCase() !== tagF.toLowerCase()) return false;
+    if (q) {
+      const inId = String(item.itemID).includes(q);
+      const inName = (item.name || '').toLowerCase().includes(q);
+      const inIcon = (item.icon || '').toLowerCase().includes(q);
+      if (!inId && !inName && !inIcon) return false;
+    }
+    return true;
+  });
+}
+
+// ═══════════════════════════════════════════════════
+//  BOOT
+// ═══════════════════════════════════════════════════
+async function init() {
+  try {
+    updateLoader(10, 'FETCHING DATA...');
+    const res = await fetch('./Upto-ob53-item-data.json');
+    if (!res.ok) throw new Error('Failed to load JSON');
+    updateLoader(60, 'PARSING ITEMS...');
+    const raw = await res.json();
+    updateLoader(80, 'PROCESSING...');
+    allItems = raw.filter(i => i.itemID);
+    buildTypeOptions();
+    buildTagOptions();
+    readURLIntoUI();
+    applyFiltersFromState();
+    updateLoader(100, 'READY');
+    await delay(300);
+    showApp();
+
+    // Handle ?tab=items (items is now the secondary tab)
+    if (getParams().get('tab') === 'items') {
+      switchTab('items');
+      renderPage();
+      // Handle ?item=ID
+      const itemId = getParams().get('item');
+      if (itemId) {
+        const found = allItems.find(i => String(i.itemID) === String(itemId));
+        if (found) {
+          const idx = filteredItems.findIndex(i => String(i.itemID) === String(itemId));
+          if (idx >= 0) { currentPage = Math.floor(idx / ITEMS_PER_PAGE) + 1; renderPage(); }
+          openOverlay(found);
+        }
+      }
+    } else {
+      // Default: show events
+      document.getElementById('eventsSection').classList.add('visible');
+      loadEvents();
+    }
+  } catch(e) {
+    document.getElementById('loadingText').textContent = 'ERROR: ' + e.message + ' — Place Upto-ob53-item-data.json in the same folder.';
+  }
+}
+
+function updateLoader(pct, text) {
+  document.getElementById('loadingBar').style.width = pct + '%';
+  document.getElementById('loadingText').textContent = text;
+}
+
+function showApp() {
+  document.getElementById('loadingScreen').classList.add('hidden');
+  document.getElementById('siteHeader').style.display = '';
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ═══════════════════════════════════════════════════
+//  ITEMS OPTIONS
+// ═══════════════════════════════════════════════════
+function buildTypeOptions() {
+  const types = [...new Set(allItems.map(i => i.type).filter(t => t && t.trim()))].sort();
+  const sel = document.getElementById('selectType');
+  types.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o); });
+}
+function buildTagOptions() {
+  const tags = [...new Set(allItems.map(i => i.tag).filter(t => t && t.trim()))].sort();
+  const sel = document.getElementById('selectTag');
+  tags.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o); });
+}
+
+// ═══════════════════════════════════════════════════
+//  ITEMS FILTERS
+// ═══════════════════════════════════════════════════
+let searchTimeout = null;
+document.getElementById('searchInput').addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(applyFilters, 180);
+});
+
+function applyFilters() {
+  applyFiltersFromState();
+  currentPage = 1;
+  renderPage();
+  pushURL();
+}
+
+function togglePanel(key) {
+  const panels = { type: 'panelType', rare: 'panelRare', tag: 'panelTag' };
+  const btns = { type: 'btnFilterType', rare: 'btnFilterRare', tag: 'btnFilterTag' };
+  Object.keys(panels).forEach(k => {
+    if (k !== key) {
+      document.getElementById(panels[k]).classList.remove('open');
+      document.getElementById(btns[k]).classList.remove('active');
+      activePanels[k] = false;
+    }
+  });
+  activePanels[key] = !activePanels[key];
+  document.getElementById(panels[key]).classList.toggle('open', activePanels[key]);
+  document.getElementById(btns[key]).classList.toggle('active', activePanels[key]);
+}
+
+function clearFilter(key) {
+  if (key === 'type') document.getElementById('selectType').value = '';
+  if (key === 'rare') document.getElementById('selectRare').value = '';
+  if (key === 'tag') document.getElementById('selectTag').value = '';
+  togglePanel(key);
+  applyFilters();
+}
+
+// ═══════════════════════════════════════════════════
+//  ITEMS RENDER
+// ═══════════════════════════════════════════════════
+function renderPage() {
+  totalPages = Math.max(1, Math.ceil(filteredItems.length / ITEMS_PER_PAGE));
+  if (currentPage > totalPages) currentPage = totalPages;
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const pageItems = filteredItems.slice(start, start + ITEMS_PER_PAGE);
+  renderGrid(pageItems);
+  renderPagination();
+  updateStats();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderGrid(items) {
+  const grid = document.getElementById('itemsGrid');
+  grid.innerHTML = '';
+  if (!items.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-state-title">NO ITEMS FOUND</div><div class="empty-state-sub">Try adjusting your search or filters</div></div>`;
+    return;
+  }
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    card.onclick = () => {
+      if (isDevMode) {
+        navigator.clipboard.writeText(String(item.itemID)).then(() => {
+          showDevToast('COPIED: ' + item.itemID);
+        }).catch(() => {
+          showDevToast('COPY FAILED');
+        });
+      } else {
+        openOverlay(item);
+      }
+    };
+    const rare = (item.Rare || 'NONE').replace(/[^A-Z_]/g, '');
+    card.innerHTML = `
+      <div class="item-img-placeholder" id="ph-${item.itemID}"><div class="placeholder-icon"></div></div>
+      <div class="card-rare-dot dot-${rare}"></div>
+      <div class="card-overlay-hint"><span>View Details</span></div>`;
+    grid.appendChild(card);
+    const img = new Image();
+    img.onload = () => {
+      const ph = document.getElementById(`ph-${item.itemID}`);
+      if (ph) { const el = document.createElement('img'); el.className = 'item-img'; el.src = img.src; el.alt = item.name || ''; ph.replaceWith(el); }
+    };
+    img.src = CDN(item.itemID);
+  });
+}
+
+function updateStats() {
+  document.getElementById('statsCount').textContent = filteredItems.length.toLocaleString();
+  document.getElementById('statsPage').textContent = totalPages > 1 ? `— Page ${currentPage} of ${totalPages}` : '';
+}
+
+function renderPagination() {
+  const pag = document.getElementById('pagination');
+  pag.innerHTML = '';
+  if (totalPages <= 1) return;
+
+  const prev = document.createElement('button');
+  prev.className = 'page-nav-btn'; prev.textContent = 'PREV'; prev.disabled = currentPage === 1;
+  prev.onclick = () => goPage(currentPage - 1);
+  pag.appendChild(prev);
+
+  buildPageRange(currentPage, totalPages).forEach(p => {
+    const btn = document.createElement('button');
+    if (p === '...') { btn.className = 'page-btn ellipsis'; btn.textContent = '...'; }
+    else { btn.className = 'page-btn' + (p === currentPage ? ' active' : ''); btn.textContent = p; btn.onclick = () => goPage(p); }
+    pag.appendChild(btn);
+  });
+
+  const next = document.createElement('button');
+  next.className = 'page-nav-btn'; next.textContent = 'NEXT'; next.disabled = currentPage === totalPages;
+  next.onclick = () => goPage(currentPage + 1);
+  pag.appendChild(next);
+}
+
+function buildPageRange(cur, total) {
+  if (total <= 9) return Array.from({ length: total }, (_, i) => i + 1);
+  const range = [], d = 2;
+  for (let i = 1; i <= total; i++) if (i === 1 || i === total || (i >= cur - d && i <= cur + d)) range.push(i);
+  const out = [];
+  for (let i = 0; i < range.length; i++) { if (i > 0 && range[i] - range[i-1] > 1) out.push('...'); out.push(range[i]); }
+  return out;
+}
+
+function goPage(p) {
+  if (p < 1 || p > totalPages) return;
+  currentPage = p; renderPage(); pushURL();
+}
+
+let currentOverlayItem = null;
+
+// ═══════════════════════════════════════════════════
+//  ITEMS OVERLAY
+// ═══════════════════════════════════════════════════
+function openOverlay(item) {
+  currentOverlayItem = item;
+  const overlay = document.getElementById('overlay');
+  const img = document.getElementById('overlayImg');
+  const loader = document.getElementById('overlayLoader');
+  const rareBar = document.getElementById('overlayRareBar');
+  const details = document.getElementById('overlayDetails');
+
+  img.style.display = 'none'; loader.style.display = 'block'; img.src = '';
+  const rare = (item.Rare || 'NONE').replace(/[^A-Z_]/g, '');
+  rareBar.className = `overlay-rare-bar bar-${rare}`;
+
+  const t = new Image();
+  t.onload = () => { img.src = t.src; img.style.display = 'block'; loader.style.display = 'none'; };
+  t.onerror = () => { loader.style.display = 'none'; };
+  t.src = CDN(item.itemID);
+
+  const fields = [
+    { key: 'Item ID', val: item.itemID, cls: 'mono' },
+    { key: 'Name', val: item.name },
+    { key: 'Icon Name', val: item.icon, cls: 'mono' },
+    { key: 'Type', val: item.type },
+    { key: 'Item Type', val: item.itemType },
+    { key: 'Rarity', val: item.Rare, rare: true },
+    { key: 'Tag', val: item.tag, cls: 'mono' },
+    { key: 'Collection', val: (item.collectionType && item.collectionType !== 'NONE') ? item.collectionType : null },
+    { key: 'Unique', val: item.isUnique === true ? 'YES' : item.isUnique === false ? 'NO' : null },
+    { key: 'Description', val: item.description, cls: 'description' },
+  ];
+
+  details.innerHTML = '';
+  fields.forEach(f => {
+    const v = f.val;
+    if (v === null || v === undefined || v === '' || v === 'undefined') return;
+    const row = document.createElement('div'); row.className = 'detail-row';
+    const key = document.createElement('div'); key.className = 'detail-key'; key.textContent = f.key;
+    const val = document.createElement('div'); val.className = 'detail-val' + (f.cls ? ' ' + f.cls : '');
+    if (f.rare) {
+      const badge = document.createElement('span');
+      badge.className = `rare-badge rare-${rare}`; badge.textContent = v; val.appendChild(badge);
+    } else { val.textContent = v; }
+    row.appendChild(key); row.appendChild(val); details.appendChild(row);
+  });
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const itemParams = new URLSearchParams(window.location.search);
+  itemParams.set('item', item.itemID);
+  history.replaceState(null, '', location.pathname + '?' + itemParams.toString());
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentOverlayItem = null;
+  const p = new URLSearchParams(window.location.search);
+  p.delete('item');
+  history.replaceState(null, '', p.toString() ? location.pathname + '?' + p.toString() : location.pathname);
+}
+
+function copyOverlayItemId() {
+  if (!currentOverlayItem) return;
+  const btn = document.getElementById('copyIdBtn');
+  navigator.clipboard.writeText(String(currentOverlayItem.itemID)).then(() => {
+    btn.classList.add('copied');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> COPIED!`;
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }).catch(() => showDevToast('COPY FAILED'));
+}
+
+function shareOverlayItem() {
+  if (!currentOverlayItem) return;
+  const params = new URLSearchParams(window.location.search);
+  params.set('item', currentOverlayItem.itemID);
+  const url = location.origin + location.pathname + '?' + params.toString();
+  if (navigator.share) {
+    navigator.share({ title: currentOverlayItem.name || 'Item', text: 'Item ID: ' + currentOverlayItem.itemID, url });
+  } else {
+    navigator.clipboard.writeText(url).then(() => showDevToast('LINK COPIED!')).catch(() => showDevToast('COPY FAILED'));
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  EVENTS
+// ═══════════════════════════════════════════════════
+async function loadEvents() {
+  const region = document.getElementById('regionSelect').value;
+  eventsRegion = region;
+  const body = document.getElementById('eventsBody');
+
+  // Use cache if available
+  if (eventsCache[region]) {
+    eventsData = eventsCache[region];
+    renderEvents();
+    return;
+  }
+
+  body.innerHTML = `<div class="events-loading"><div class="events-spinner"></div>LOADING ${region} EVENTS...</div>`;
+
+  try {
+    const res = await fetch(EVENTS_API(region));
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    eventsCache[region] = data;
+    eventsData = data;
+    renderEvents();
+  } catch(e) {
+    body.innerHTML = `<div class="events-error">Failed to load events for ${region}.<br>Check your connection or try a different region.</div>`;
+  }
+}
+
+function renderEvents() {
+  if (!eventsData) return;
+  const body = document.getElementById('eventsBody');
+  const q = (document.getElementById('eventsSearch').value || '').trim().toLowerCase();
+  const now = Math.floor(Date.now() / 1000);
+
+  const updates = (eventsData.updates && eventsData.updates.items) || [];
+  const events = (eventsData.events && eventsData.events.items) || [];
+
+  function filterItems(arr) {
+    if (!q) return arr;
+    return arr.filter(e => (e.Title || '').toLowerCase().includes(q));
+  }
+
+  const filteredUpdates = filterItems(updates);
+  const filteredEvents = filterItems(events);
+
+  if (!filteredUpdates.length && !filteredEvents.length) {
+    body.innerHTML = `<div class="events-loading" style="color:var(--text-muted)">NO EVENTS FOUND</div>`;
+    return;
+  }
+
+  body.innerHTML = '';
+
+  if (filteredUpdates.length) {
+    const label = document.createElement('div');
+    label.className = 'events-section-label';
+    label.innerHTML = `<span></span> UPDATES`;
+    body.appendChild(label);
+    const list = document.createElement('div');
+    list.className = 'events-list';
+    filteredUpdates.forEach(ev => list.appendChild(buildEventCard(ev, now)));
+    body.appendChild(list);
+  }
+
+  if (filteredEvents.length) {
+    const label = document.createElement('div');
+    label.className = 'events-section-label';
+    label.innerHTML = `<span></span> EVENTS`;
+    body.appendChild(label);
+    const list = document.createElement('div');
+    list.className = 'events-list';
+    filteredEvents.forEach(ev => list.appendChild(buildEventCard(ev, now)));
+    body.appendChild(list);
+  }
+}
+
+function buildEventCard(ev, now) {
+  const card = document.createElement('div');
+  card.className = 'event-card';
+  card.onclick = () => openEvOverlay(ev);
+
+  const start = parseInt(ev.Start) || 0;
+  const end = parseInt(ev.End) || 0;
+  const isLive = now >= start && now <= end;
+
+  let timeHtml = '';
+  if (isLive) {
+    timeHtml = `<span class="event-time-badge"><span class="event-live-dot"></span>LIVE</span>`;
+  } else if (now < start) {
+    timeHtml = `<span class="event-time-badge">UPCOMING</span>`;
+  } else {
+    timeHtml = `<span class="event-time-badge">ENDED</span>`;
+  }
+
+  let bannerHtml = '';
+  if (ev.Banner) {
+    bannerHtml = `<div class="event-banner-wrap">
+      <img class="event-banner" src="${escHtml(ev.Banner)}" alt="${escHtml(ev.Title || '')}" loading="lazy" />
+    </div>`;
+  } else {
+    bannerHtml = `<div class="event-banner-wrap">
+      <img class="event-banner event-banner-placeholder-img" src="https://raw.githubusercontent.com/I-SHOW-AKIRU200/ITEM-ID-WEB/main/images/1775308720829.png" alt="No Banner" loading="lazy" />
+    </div>`;
+  }
+
+  card.innerHTML = `${bannerHtml}
+    <div class="event-footer">
+      <div class="event-title">${escHtml(ev.Title || 'Untitled Event')}</div>
+      ${timeHtml}
+    </div>`;
+
+  return card;
+}
+
+// ═══════════════════════════════════════════════════
+//  EVENT OVERLAY
+// ═══════════════════════════════════════════════════
+function openEvOverlay(ev) {
+  const overlay = document.getElementById('evOverlay');
+  const banner = document.getElementById('evOverlayBanner');
+  const body = document.getElementById('evOverlayBody');
+  const bannerWrap = document.getElementById('evOverlayBannerWrap');
+
+  if (ev.Banner) {
+    banner.src = ev.Banner;
+    banner.style.display = 'block';
+    bannerWrap.style.display = '';
+  } else {
+    banner.style.display = 'none';
+    bannerWrap.style.display = 'none';
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  const start = parseInt(ev.Start) || 0;
+  const end = parseInt(ev.End) || 0;
+  const isLive = now >= start && now <= end;
+  const isUpcoming = now < start;
+
+  let statusHtml = '';
+  if (isLive) statusHtml = `<span class="ev-status-active"><span class="event-live-dot"></span> LIVE</span>`;
+  else if (isUpcoming) statusHtml = `<span class="ev-status-upcoming">UPCOMING</span>`;
+  else statusHtml = `<span class="ev-status-ended">ENDED</span>`;
+
+  const fields = [];
+
+  if (ev.Title) fields.push({ key: 'Title', val: ev.Title });
+  fields.push({ key: 'Status', val: statusHtml, raw: true });
+  if (start) fields.push({ key: 'Start', val: formatTs(start), cls: 'mono' });
+  if (end && end < 4000000000) fields.push({ key: 'End', val: formatTs(end), cls: 'mono' });
+  if (ev.Details) fields.push({ key: 'Details', val: ev.Details, cls: 'desc' });
+
+  // Link field — skip internal V2_ links
+  const link = ev.Link || ev.LinkAlt;
+  if (link && link.startsWith('http')) {
+    fields.push({ key: 'Link', val: link, isLink: true });
+  }
+
+  body.innerHTML = '';
+  fields.forEach(f => {
+    const row = document.createElement('div'); row.className = 'ev-detail-row';
+    const key = document.createElement('div'); key.className = 'ev-detail-key'; key.textContent = f.key;
+    const val = document.createElement('div');
+    if (f.isLink) {
+      val.className = 'ev-detail-val';
+      const a = document.createElement('a');
+      a.href = f.val; a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'ev-detail-val link-val';
+      a.textContent = f.val;
+      val.appendChild(a);
+    } else if (f.raw) {
+      val.className = 'ev-detail-val';
+      val.innerHTML = f.val;
+    } else {
+      val.className = 'ev-detail-val' + (f.cls ? ' ' + f.cls : '');
+      val.textContent = f.val;
+    }
+    row.appendChild(key); row.appendChild(val); body.appendChild(row);
+  });
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEvOverlay() {
+  document.getElementById('evOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══════════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════════
+function formatTs(ts) {
+  const d = new Date(ts * 1000);
+  return d.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Keyboard close
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeOverlay(); closeEvOverlay(); }
+});
+
+// ═══════════════════════════════════════════════════
+//  SETTINGS
+// ═══════════════════════════════════════════════════
+let isLightTheme = false;
+let isDevMode = false;
+
+function openSettings() {
+  document.getElementById('settingsSheet').classList.add('open');
+  document.getElementById('settingsBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSettings() {
+  document.getElementById('settingsSheet').classList.remove('open');
+  document.getElementById('settingsBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleTheme() {
+  isLightTheme = !isLightTheme;
+  document.body.classList.toggle('light-theme', isLightTheme);
+  document.getElementById('themeToggle').classList.toggle('on', isLightTheme);
+}
+
+function toggleDevMode() {
+  isDevMode = !isDevMode;
+  document.body.classList.toggle('dev-mode', isDevMode);
+  document.getElementById('devToggle').classList.toggle('on', isDevMode);
+  showDevToast(isDevMode ? 'DEVELOPER MODE ON' : 'DEVELOPER MODE OFF');
+}
+
+function showDevToast(msg) {
+  const t = document.getElementById('devToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ═══════════════════════════════════════════════════
+//  START
+// ═══════════════════════════════════════════════════
+init();
+</script>
+</body>
+</html>
