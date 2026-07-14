@@ -9,7 +9,7 @@ A lightweight, fast, and responsive static website built to manage and retrieve 
 * **Mobile Friendly:** Fully responsive design.
 
 ## 🌐 Live Demo
-Check out the live tool here: [https://i-show-akiru200.github.io/ITEM-ID-WEB/](https://i-show-akiru200.github.io/ITEM-ID-WEB/)
+Check out the live tool here: [https://whisker-kisses.github.io/ITEM-ID-WEB/](https://whisker-kisses.github.io/ITEM-WEB/)
 
 ## 🛠️ Built With
 * **HTML5** - Markup structure
@@ -21,7 +21,7 @@ If you want to run this project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/I-SHOW-AKIRU200/ITEM-ID-WEB.git
+   git clone https://github.com/whisker-kisses/ITEM-WEB.git
 
 2. Navigate to the folder:
    ```bash
@@ -33,4 +33,4 @@ This project is licensed under the MIT License - see the <LICENSE> file for deta
 
 # 🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-# Developed by AKIRU
+# Developed by Watashii
